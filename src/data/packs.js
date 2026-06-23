@@ -23,7 +23,7 @@ export const PACKS = [
   {
     id: "mvp",
     name: "MVP Chase",
-    cost: 900,
+    cost: 1500,
     amount: 3,
     minRarityValue: 8,
   },

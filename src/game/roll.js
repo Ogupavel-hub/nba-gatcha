@@ -8,12 +8,12 @@ function matchesFilter(player, filter = {}) {
   return true;
 }
 
-function getPool(pack) {
-  let pool = PLAYERS.filter((player) => matchesFilter(player, pack?.filter));
+function getPool(pack, players) {
+  let pool = players.filter((player) => matchesFilter(player, pack?.filter));
   if (pack?.minRarityValue) {
     pool = pool.filter((player) => RARITIES[player.rarity].value >= pack.minRarityValue);
   }
-  return pool.length ? pool : PLAYERS;
+  return pool.length ? pool : players;
 }
 
 function rollRarity(pool) {
@@ -29,8 +29,8 @@ function rollRarity(pool) {
   return adjusted[adjusted.length - 1];
 }
 
-export function rollPlayer(pack = null, excludedIds = []) {
-  const fullPool = getPool(pack);
+export function rollPlayer(pack = null, excludedIds = [], players = PLAYERS) {
+  const fullPool = getPool(pack, players);
   const excluded = new Set(excludedIds);
   const freshPool = fullPool.filter((player) => !excluded.has(player.id));
   const pool = freshPool.length ? freshPool : fullPool;
@@ -39,11 +39,11 @@ export function rollPlayer(pack = null, excludedIds = []) {
   return rarityPool[Math.floor(Math.random() * rarityPool.length)];
 }
 
-export function rollPack(pack, excludedIds = []) {
+export function rollPack(pack, excludedIds = [], pool = PLAYERS) {
   const players = [];
 
   for (let index = 0; index < pack.amount; index += 1) {
-    const player = rollPlayer(pack, [...excludedIds, ...players.map((entry) => entry.id)]);
+    const player = rollPlayer(pack, [...excludedIds, ...players.map((entry) => entry.id)], pool);
     players.push(player);
   }
 

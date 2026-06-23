@@ -1,6 +1,5 @@
 import { Lock } from "lucide-react";
 import { RARITIES } from "../data/rarities";
-import { TEAMS } from "../data/players";
 
 function DuplicateStars({ copies = 0 }) {
   const stars = Math.min(3, Math.max(0, copies - 1));
@@ -17,6 +16,7 @@ function DuplicateStars({ copies = 0 }) {
 
 export default function PlayerBoard({
   players,
+  teams,
   collection,
   highlightedId,
   rollMaskedIds = [],
@@ -25,8 +25,9 @@ export default function PlayerBoard({
 }) {
   return (
     <section className={`player-board ${isRolling ? "is-roll-active" : ""}`} aria-label="Player board">
-      {TEAMS.map((team) => (
+      {teams.map((team) => (
         <div className="team-column" key={team.id}>
+          <div className="team-column-title" title={team.name}>{team.short}</div>
           {players
             .filter((player) => player.teamId === team.id)
             .map((player) => {
@@ -62,7 +63,16 @@ export default function PlayerBoard({
                         <div className="roll-rarity-cover" aria-hidden="true" />
                       ) : (
                         <>
-                          <img src={player.headshot} alt="" referrerPolicy="no-referrer" />
+                          {player.headshot ? (
+                            <img src={player.headshot} alt="" referrerPolicy="no-referrer" />
+                          ) : (
+                            <span
+                              className="player-abbreviation"
+                              style={{ "--team-primary": player.teamColors?.[0], "--team-secondary": player.teamColors?.[1] }}
+                            >
+                              {player.abbreviation}
+                            </span>
+                          )}
                           <DuplicateStars copies={owned?.copies ?? 0} />
                         </>
                       )}

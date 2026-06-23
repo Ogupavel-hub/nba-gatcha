@@ -1,4 +1,4 @@
-import { RotateCcw, Sparkles, Zap } from "lucide-react";
+import { BrainCircuit, RotateCcw, Sparkles, Zap } from "lucide-react";
 
 export default function RollPanel({
   energy,
@@ -8,6 +8,7 @@ export default function RollPanel({
   canRoll,
   isRolling,
   onRoll,
+  onQuiz,
   onReset,
   nextEnergyText,
 }) {
@@ -30,6 +31,14 @@ export default function RollPanel({
         <Sparkles size={22} />
         {isRolling ? "ROLLING" : "ROLL"}
       </button>
+
+      {energy === 0 && !isRolling && (
+        <button className="quiz-launcher" onClick={onQuiz}>
+          <BrainCircuit size={19} />
+          NBA Quiz
+          <span>Win Energy</span>
+        </button>
+      )}
 
       <button className="icon-command" onClick={onReset} aria-label="Reset save" title="Reset save">
         <RotateCcw size={18} />

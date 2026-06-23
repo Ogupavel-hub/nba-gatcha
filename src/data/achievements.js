@@ -1,10 +1,6 @@
-export const ACHIEVEMENTS = [
-  {
-    id: "first_roll",
-    title: "First Draft",
-    reward: 150,
-    getProgress: ({ totalRolls }) => ({ current: totalRolls, target: 1 }),
-  },
+import { DYNASTY_TEAMS } from "./dynasties";
+
+const BASE_ACHIEVEMENTS = [
   {
     id: "roll_10",
     title: "Ten Rolls",
@@ -120,3 +116,12 @@ export const ACHIEVEMENTS = [
     getProgress: ({ teamProgress }) => teamProgress.MIN,
   },
 ];
+
+const DYNASTY_ACHIEVEMENTS = DYNASTY_TEAMS.map((team) => ({
+  id: `team_${team.id}`,
+  title: `${team.short} Set`,
+  reward: 1000,
+  getProgress: ({ teamProgress }) => teamProgress[team.id] ?? { current: 0, target: 5 },
+}));
+
+export const ACHIEVEMENTS = [...BASE_ACHIEVEMENTS, ...DYNASTY_ACHIEVEMENTS];
