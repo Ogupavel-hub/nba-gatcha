@@ -2296,16 +2296,31 @@ h1 {
 
 @media (max-width: 680px) {
   .app-shell {
-    padding: 14px;
+    padding: 10px 10px 150px;
   }
 
   .topbar {
     align-items: start;
     flex-direction: column;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 1.15rem;
+    line-height: 0.96;
+  }
+
+  .topbar p {
+    margin-top: 3px;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 
   .completion {
     justify-content: start;
+    min-width: 0;
+    font-size: 0.78rem;
   }
 
   .quiz-options {
@@ -2340,8 +2355,73 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .left-rail {
+    order: 2;
+  }
+
+  .right-rail {
+    order: 3;
+  }
+
+  .roll-panel {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    z-index: 40;
+    grid-template-columns: 1fr 42px;
+    gap: 8px;
+    padding: 9px;
+    border-color: rgba(255, 207, 90, 0.32);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 42px rgba(0, 0, 0, 0.46);
+  }
+
+  .roll-panel .wallet,
+  .roll-panel .quiz-launcher {
+    grid-column: 1 / -1;
+  }
+
+  .roll-panel .roll-button {
+    grid-column: 1;
+  }
+
+  .roll-panel > .icon-command {
+    grid-column: 2;
+    width: 42px;
+    height: 58px;
+    align-self: stretch;
+  }
+
   .wallet {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .wallet > div {
+    padding: 7px 8px;
+  }
+
+  .wallet-label,
+  .wallet small {
+    font-size: 0.63rem;
+  }
+
+  .wallet strong {
+    margin: 2px 0 1px;
+    font-size: 0.9rem;
+  }
+
+  .roll-button {
+    min-height: 58px;
+    font-size: 1.04rem;
+    border-radius: 10px;
+  }
+
+  .quiz-launcher {
+    min-height: 38px;
+    font-size: 0.78rem;
   }
 
   .featured-card {
@@ -2349,17 +2429,69 @@ h1 {
   }
 
   .stage {
-    padding: 10px;
+    order: 1;
+    min-height: 0;
+    max-height: calc(100dvh - 164px);
+    padding: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .era-tabs {
+    position: sticky;
+    top: 0;
   }
 
   .player-board {
-    grid-template-columns: repeat(10, minmax(58px, 1fr));
-    gap: 6px;
-    min-width: 640px;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    min-width: 0;
+    padding: 7px;
+  }
+
+  .team-column {
+    grid-template-columns: 48px repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 5px;
+  }
+
+  .team-column-title {
+    min-height: 0;
+    padding: 4px 3px;
+    font-size: 0.54rem;
+    line-height: 1;
   }
 
   .board-card {
-    min-height: 86px;
+    min-height: 0;
+    border-radius: 6px;
+  }
+
+  .board-card-face {
+    border-radius: 6px;
+  }
+
+  .board-card-back::before,
+  .roll-rarity-cover::after {
+    inset: 6px;
+    border-radius: 4px;
+  }
+
+  .board-card-front {
+    padding: 2px;
+  }
+
+  .board-card-front img {
+    inset: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+  }
+
+  .duplicate-stars {
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 0.58rem;
   }
 
   .battle-overlay {
