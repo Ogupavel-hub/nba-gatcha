@@ -28,6 +28,17 @@ body {
 
 button {
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 140ms ease,
+    filter 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    box-shadow 140ms ease;
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px) scale(0.99);
 }
 
 .app-shell {
@@ -102,9 +113,13 @@ h1 {
 .achievements-panel,
 .stage,
 .collection-section {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(18, 21, 27, 0.86);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 34%),
+    rgba(18, 21, 27, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 18px 60px rgba(0, 0, 0, 0.28);
 }
 
 .roll-panel {
@@ -122,8 +137,11 @@ h1 {
 .wallet > div {
   min-width: 0;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 7px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .wallet-label,
@@ -148,14 +166,28 @@ h1 {
   gap: 10px;
   width: 100%;
   min-height: 48px;
-  border: 0;
+  border: 1px solid rgba(255, 237, 176, 0.9);
   border-radius: 8px;
   color: #111318;
-  background: #ffcf5a;
+  background:
+    linear-gradient(180deg, #fff0a6 0%, #ffcf5a 54%, #df9c26 100%);
   font-weight: 900;
   font-size: 1rem;
   cursor: pointer;
   letter-spacing: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -3px 0 rgba(121, 75, 13, 0.28),
+    0 12px 24px rgba(255, 169, 49, 0.16);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.roll-button:hover:not(:disabled) {
+  filter: brightness(1.06) saturate(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -3px 0 rgba(121, 75, 13, 0.32),
+    0 16px 30px rgba(255, 169, 49, 0.22);
 }
 
 .roll-button:disabled,
@@ -170,13 +202,25 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(80, 166, 255, 0.42);
+  border: 1px solid rgba(80, 166, 255, 0.5);
   border-radius: 8px;
   color: #dcecff;
-  background: #1b2b3c;
+  background:
+    linear-gradient(180deg, rgba(80, 166, 255, 0.22), rgba(28, 53, 76, 0.92)),
+    #1b2b3c;
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 12px 24px rgba(80, 166, 255, 0.12);
+}
+
+.quiz-launcher:hover:not(:disabled) {
+  border-color: rgba(129, 195, 255, 0.78);
+  background:
+    linear-gradient(180deg, rgba(80, 166, 255, 0.3), rgba(31, 67, 99, 0.96)),
+    #1b2b3c;
 }
 
 .quiz-launcher span {
@@ -280,6 +324,7 @@ h1 {
   font-weight: 800;
   text-align: left;
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .quiz-options button:hover:not(:disabled) {
@@ -338,7 +383,7 @@ h1 {
   border: 0;
   border-radius: 6px;
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
@@ -355,9 +400,16 @@ h1 {
   color: #d9dde5;
   background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.icon-command:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .stage {
+  position: relative;
   min-height: 620px;
   display: grid;
   align-content: start;
@@ -365,6 +417,26 @@ h1 {
   padding: 18px;
   overflow-x: auto;
   overflow-y: hidden;
+  border-color: rgba(252, 196, 78, 0.22);
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(255, 255, 255, 0.1) 50%, transparent calc(50% + 1px)),
+    radial-gradient(circle at 50% 50%, transparent 0 62px, rgba(255, 255, 255, 0.08) 63px 65px, transparent 66px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 34%),
+    linear-gradient(135deg, rgba(137, 73, 35, 0.34), rgba(23, 28, 36, 0.92) 44%, rgba(30, 58, 82, 0.5)),
+    #141820;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 6px rgba(0, 0, 0, 0.16),
+    0 24px 74px rgba(0, 0, 0, 0.34);
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  pointer-events: none;
 }
 
 .era-tabs {
@@ -377,6 +449,9 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 7px;
   background: #111318;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
 .era-tab {
@@ -397,7 +472,7 @@ h1 {
 
 .era-tab.is-active {
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
 }
 
 .era-tab:disabled {
@@ -459,20 +534,34 @@ h1 {
   min-height: 42px;
   margin-top: 8px;
   padding: 0 18px;
-  border: 0;
+  border: 1px solid rgba(255, 237, 176, 0.85);
   border-radius: 6px;
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 0 rgba(121, 75, 13, 0.28);
 }
 
 .player-board {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 8px;
   width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(7, 9, 13, 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.18),
+    0 14px 38px rgba(0, 0, 0, 0.18);
 }
 
 .team-column {
@@ -488,7 +577,7 @@ h1 {
   place-items: center;
   overflow: visible;
   padding: 5px 4px;
-  color: #aeb4c0;
+  color: #d0d5de;
   font-size: 0.62rem;
   font-weight: 900;
   line-height: 1.08;
@@ -496,9 +585,12 @@ h1 {
   text-transform: uppercase;
   white-space: normal;
   overflow-wrap: anywhere;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.045);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.03)),
+    rgba(10, 12, 16, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .board-card {
@@ -507,7 +599,11 @@ h1 {
   min-height: 94px;
   border-radius: 8px;
   perspective: 800px;
-  transition: transform 180ms ease;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.board-card:hover {
+  filter: brightness(1.05);
 }
 
 .board-card-inner {
@@ -542,6 +638,7 @@ h1 {
   backface-visibility: hidden;
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--rarity-color), transparent 75%),
+    inset 0 8px 18px rgba(255, 255, 255, 0.045),
     0 0 18px color-mix(in srgb, var(--rarity-color), transparent 88%);
 }
 
@@ -563,9 +660,12 @@ h1 {
 .board-card.is-closed:not(.is-highlighted) .board-card-face {
   border-color: rgba(255, 255, 255, 0.12);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 62%),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 4px, transparent 4px 10px),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 45%),
+    linear-gradient(180deg, rgba(29, 34, 43, 0.94), rgba(13, 16, 22, 0.96));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -10px 22px rgba(0, 0, 0, 0.28);
 }
 
 .board-card.is-closed:not(.is-highlighted) .board-card-back {
@@ -599,6 +699,7 @@ h1 {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--rarity-color), white 12%), transparent 68%),
     color-mix(in srgb, var(--rarity-color), #16191f 64%);
+  box-shadow: inset 0 0 36px color-mix(in srgb, var(--rarity-color), transparent 58%);
 }
 
 .roll-rarity-cover::after {
@@ -1039,7 +1140,20 @@ h1 {
     linear-gradient(180deg, var(--pack-top), var(--pack-bottom));
   cursor: pointer;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -8px 18px rgba(0, 0, 0, 0.2),
+    0 14px 28px rgba(0, 0, 0, 0.2);
+}
+
+.pack-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.32);
+  filter: brightness(1.08) saturate(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -8px 18px rgba(0, 0, 0, 0.2),
+    0 18px 34px rgba(0, 0, 0, 0.28);
 }
 
 .pack-card::before {
@@ -1166,13 +1280,25 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(255, 207, 90, 0.42);
+  border: 1px solid rgba(255, 237, 176, 0.78);
   border-radius: 8px;
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -3px 0 rgba(121, 75, 13, 0.26),
+    0 12px 24px rgba(255, 169, 49, 0.13);
+}
+
+.championship-launcher:hover:not(:disabled) {
+  filter: brightness(1.05) saturate(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -3px 0 rgba(121, 75, 13, 0.3),
+    0 16px 30px rgba(255, 169, 49, 0.19);
 }
 
 .championship-launcher-timer {
@@ -1250,6 +1376,11 @@ h1 {
   color: #f4f0e8;
   background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.championship-close:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .championship-stages {
@@ -1377,25 +1508,38 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border: 0;
+  border: 1px solid rgba(255, 237, 176, 0.78);
   border-radius: 6px;
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 0 rgba(121, 75, 13, 0.26);
+}
+
+.championship-enter:hover:not(:disabled) {
+  filter: brightness(1.06);
 }
 
 .championship-enter:disabled {
+  border-color: rgba(255, 255, 255, 0.1);
   color: #8e949d;
   background: #30353d;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .championship-enter.is-reward {
+  border-color: rgba(105, 243, 177, 0.5);
   color: #f4f0e8;
-  background: #16865a;
-  box-shadow: 0 0 0 1px rgba(65, 210, 145, 0.35), 0 0 18px rgba(65, 210, 145, 0.18);
+  background: linear-gradient(180deg, #21b978, #16865a);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 0 1px rgba(65, 210, 145, 0.25),
+    0 0 18px rgba(65, 210, 145, 0.18);
 }
 
 .championship-roster {
@@ -2045,13 +2189,20 @@ h1 {
   flex: 0 0 auto;
   gap: 4px;
   min-height: 28px;
-  border: 1px solid rgba(255, 207, 90, 0.4);
+  border: 1px solid rgba(255, 237, 176, 0.72);
   border-radius: 8px;
   color: #111318;
-  background: #ffcf5a;
+  background: linear-gradient(180deg, #fff0a6, #ffcf5a 58%, #df9c26);
   font-size: 0.76rem;
   font-weight: 900;
   cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    inset 0 -2px 0 rgba(121, 75, 13, 0.24);
+}
+
+.claim-button:hover:not(:disabled) {
+  filter: brightness(1.06);
 }
 
 .claim-button:disabled {
